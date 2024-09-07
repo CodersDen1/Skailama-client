@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://skailama-server-9mh79.ondigitalocean.app/";
+const API_URL = process.env.SERVER_LINK || "http://localhost:5342"; ;
 
 
 export class UserApi {
