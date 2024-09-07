@@ -22,13 +22,14 @@ export default function Home() {
   const handleButtonClick = async()=>{
     console.log("button clicked");
     const response  = await userApi.buttonClicked();
+    console.log(response);
   }
   
 
   return (
     <>
     <div className="checking" style={{fontFamily: "var(--font-geist-sans)", minWidth: "50%", minHeight: "20%"}}
-              onClick={()=>{}}
+              onClick={()=>{handleButtonClick()}}
     >
             click me 
     </div>
