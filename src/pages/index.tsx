@@ -1,38 +1,33 @@
 import Head from "next/head";
 import Image from "next/image";
 import localFont from "next/font/local";
-import styles from "@/styles/Home.module.css";
-import userApi from "@/services/UserApi";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
-
+import { useRouter } from "next/router";
+import Authentication from "@/pages/authentication";
+import Dashboard from "@/pages/dashboard";
+import Settings from "@/pages/settings";
+import Projects from "@/pages/projects";
+import TransScript from "@/pages/transcript";
+import styles from "@/styles/Main.module.scss";
 
 export default function Home() {
 
-  const handleButtonClick = async()=>{
-    console.log("button clicked");
-    const response  = await userApi.buttonClicked();
-    console.log(response);
-  }
-  
+    const router = useRouter();
+    const {page} = router.query;
+    const RenderLayout = () => {
+        switch (page) {
+            case "authentication":  return <Authentication />;
+            case "dashboard": return <Dashboard />;
+            case "settings": return <Settings />;
+            case "projects": return <Projects />;
+            case "transcript": return <TransScript />;
+            default: return <Authentication />;
+        }
+    };
 
   return (
-    <>
-    <div className="checking" style={{fontFamily: "var(--font-geist-sans)", minWidth: "50%", minHeight: "20%"}}
-              onClick={()=>{handleButtonClick()}}
-    >
-            click me 
+    <div className={styles.Main}>
+      {RenderLayout()}
     </div>
-    </>
   );
 }
